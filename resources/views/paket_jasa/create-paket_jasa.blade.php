@@ -39,7 +39,7 @@
                             <div class="mb-4">
                                 <label for="title" class="block mb-2 text-sm font-medium text-white">
                                     Nama Jet</label>
-                                <input type="text" id="default-input"" name="title"
+                                <input type="text" id="default-input"" name="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Isikan Nama Unit.." />
                                 @error('name')
@@ -77,10 +77,10 @@
 
                             <div class="mb-4">
                                 <label for="deskripsi" class="block mb-2 text-sm font-medium text-white">
-                                    Deskripsi Paket</label>
+                                    Deskripsi Unit</label>
                                 <textarea id="deskripsi" rows="4" name="desc"
                                     class="block p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Isikan Deskripsi Paket..."></textarea>
+                                    placeholder="Isikan Deskripsi Unit..."></textarea>
                                 @error('desc')
                                     <span class="text-red-500  text-xs"> {{ $message }}</span>
                                 @enderror
@@ -90,16 +90,13 @@
                                 <label for="min_price" class="block mb-2 text-sm font-medium text-white">Harga
                                     Sewa</label>
                                 <input type="text" id="min_price" aria-describedby="helper-text-explanation"
-                                    x-model="minPrice" x-on:input="minPrice = formatCurrency(minPrice)" name="min_price"
+                                    x-model="minPrice" x-on:input="minPrice = formatCurrency(minPrice)" name="price"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="5000000" required />
+                                    placeholder="5000000" />
                                 @error('price')
                                     <span class="text-red-500  text-xs"> {{ $message }}</span>
                                 @enderror
                             </div>
-
-
-
 
                             <button type="submit" id="submit"
                                 class="text-white bg-shotlanceTosca hover:bg-hoverTosca focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
@@ -107,17 +104,16 @@
                         <div class="">
                             <div x-data="{ image: '' }">
                                 <div class="mb-5">
-                                    <label class="block mb-2 text-sm font-medium text-white" for="thumbnail">Thumbnail
-                                        Paket Jasa</label>
-                                    <input x-on:change="image = URL.createObjectURL($event.target.files[0])"
-                                        name="thumbnail"
+                                    <label class="block mb-2 text-sm font-medium text-white" for="thumbnail">Foto
+                                        Unit Jet</label>
+                                    <input x-on:change="image = URL.createObjectURL($event.target.files[0])" name="photo"
                                         class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                         id="small_size" type="file">
                                     <img x-show="image" :src="image" class="w-auto h-[500px] mb-3"
                                         alt="Preview Image">
                                     <img x-show="!image" src="{{ asset('images/background-hero.jpg') }}"
                                         class="w-auto h-[500px] mb-3" alt="Placeholder Image">
-                                    @error('thumbnail')
+                                    @error('photo')
                                         <span class="text-red-500 text-xs"> {{ $message }}</span>
                                     @enderror
                                 </div>

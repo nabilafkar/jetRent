@@ -32,7 +32,9 @@ Route::get('/register', [AuthController::class, 'indexRegister']);
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/admin/unit', [UnitController::class, 'index'])->name('admin.dashboard');
-        Route::post('/admin/unit', [UnitController::class, 'index'])->name('unit.store');
+        Route::get('/admin/unit/{unit}', [UnitController::class, 'show'])->name('unit.show');
+        Route::get('/admin/{unit}/edit', [UnitController::class, 'edit'])->name('unit.edit');
+        Route::post('/admin/unit', [UnitController::class, 'store'])->name('unit.store');
         Route::get('/adminn/unit/tambah', [UnitController::class, 'create'])->name('unit.create');
         Route::put('/admin/unit/{unit}', [UnitController::class, 'update'])->name('unit.update');
         Route::delete('/admin/unit/{unit}', [UnitController::class, 'destroy'])->name('unit.destroy');
