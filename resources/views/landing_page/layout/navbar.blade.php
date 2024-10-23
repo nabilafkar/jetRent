@@ -45,7 +45,7 @@
         @auth
 
 
-            <a class="" href="{{ route('order.indexBuyer', Auth::user()->id) }}">
+            <a class="" href="">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-white">
                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -54,7 +54,7 @@
 
             </a>
 
-            <a href="{{ route('user.favorite.index', Auth::user()->id) }}">
+            <a href="">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-white">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -71,7 +71,7 @@
                     type="button">
                     <span class="sr-only">Open user menu</span>
                     <img class="w-8 h-8 me-2 rounded-full object-cover"
-                        src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('/images/turu.jpg') }}"
+                        src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : asset('/images/turu.jpg') }}"
                         alt="User Photo">
 
                     <p> {{ Auth::user()->fname }} {{ Auth::user()->lname }} </p>
@@ -85,31 +85,28 @@
                 <div id="dropdownAvatarName"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                        <div class="font-medium ">{{ Auth::user()->uname }} </div>
+                        <div class="font-medium ">{{ Auth::user()->username }} </div>
                         <div class="truncate">{{ Auth::user()->email }}</div>
                     </div>
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-                        @if (Auth::user()->role->name == 'seller')
-                            <li>
-                                <a href="{{ route('dashboardSeller') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                            </li>
-                        @endif
+
                         <li>
-                            <a href="{{ route('order.indexBuyer', Auth::user()->id) }}"
+                            <a href=""
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                        </li>
+
+                        <li>
+                            <a href=""
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Transaksi</a>
                         </li>
                         <li>
                             <a href="/user/profile"
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
                         </li>
-                        <li>
-                            <a href="{{ route('user.favorite.index', Auth::user()->id) }}"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Favorite</a>
-                        </li>
+         
 
-                        @if (Auth::user()->role->name == 'buyer')
+                        @if (Auth::user()->role == 'buyer')
                             <li>
                                 <a href="{{ route('question.index') }}"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Diskusi

@@ -15,11 +15,12 @@ class Unit extends Model
         'price',
         'brand',
         'stock',
+        'photo',
     ];
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'unit_categories');
+        return $this->belongsToMany(Category::class, 'unit_categories', 'unit_id', 'category_id');
     }
 
     public function unitCategories()

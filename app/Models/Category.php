@@ -12,7 +12,7 @@ class Category extends Model
 
     public function units()
     {
-        return $this->belongsToMany(Unit::class, 'unit_categories');
+        return $this->belongsToMany(Unit::class, 'unit_categories', 'category_id', 'unit_id');
     }
     public function unitCategories()
     {

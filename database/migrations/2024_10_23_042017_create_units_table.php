@@ -18,7 +18,8 @@ return new class extends Migration
             $table->text('desc');
             $table->decimal('price', 15, 2);
             $table->string('brand');
-            $table->integer('stock');
+            $table->boolean('stock')->default(true);
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
