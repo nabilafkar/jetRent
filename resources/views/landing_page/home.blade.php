@@ -109,8 +109,15 @@
                             </span>
                         </div>
                         <div class="flex items-center justify-between ">
-                            <a href="https://wa.me/6282147588138?text=Halo%20saya%20ingin%20pesan%20jet"
-                                class="text-white bg-shotlanceTosca hover:bg-hoverTosca focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  transition ease-in-out delay-75">Pesan</a>
+                            @if (Auth::check())
+                                <a href="https://wa.me/6282147588138?text=Halo%20saya%20ingin%20pesan%20jet"
+                                    class="text-white bg-shotlanceTosca hover:bg-hoverTosca focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  transition ease-in-out delay-75">Pesan</a>
+                            @else
+                                <a href="{{ route('login') }}"
+                                    class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  transition ease-in-out delay-75">Login
+                                    untuk Pesan</a>
+                            @endif
+
                             {{-- start of tombol favorite --}}
 
 

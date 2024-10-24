@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\RentalController;
-use App\Http\Controllers\UnitController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LandingpageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('admin/rentals', [RentalController::class, 'store'])->name('rentals.store');
         Route::get('admin/rentals', [RentalController::class, 'index'])->name('rentals.index');
         Route::put('admin/rentals/{rental}/return', [RentalController::class, 'returnRental'])->name('rentals.return');
+
+        Route::get('admin/categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+        Route::post('admin/categories', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::put('admin/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     });
 
     Route::group(['middleware' => ['role:user']], function () {

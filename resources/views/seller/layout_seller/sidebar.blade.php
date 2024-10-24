@@ -24,7 +24,7 @@
         <ul class="flex flex-col pl-0 mb-0">
             <li class="mt-0.5 w-full">
                 <a class="{{ Request::is('*unit') ? 'text-black bg-slate-200 rounded-xl' : '' }}hover:bg-slate-200 rounded-xl duration-300 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors group"
-                    href="">
+                    href="{{ route('admin.dashboard') }}">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                         <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
@@ -59,14 +59,14 @@
             </li> --}}
 
             <li class="mt-0.5 w-full">
-                <a class="hover:bg-slate-200 group rounded-xl duration-300 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ Request::is('seller/package*') ? 'text-black bg-slate-200 rounded-xl' : '' }}"
-                    href="">
+                <a class="{{ Request::is('*categories') ? 'text-black bg-slate-200 rounded-xl' : '' }} hover:bg-slate-200 group rounded-xl duration-300 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ Request::is('seller/package*') ? 'text-black bg-slate-200 rounded-xl' : '' }}"
+                    href="{{ route('categories.index') }}">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                         <i class="relative top-0 text-sm leading-normal text-orange-500 fa fa-briefcase"></i>
                     </div>
                     <span
-                        class="ml-1 duration-300 opacity-100 pointer-events-none ease group-hover:text-gray-900">Unit</span>
+                        class="ml-1 duration-300 opacity-100 pointer-events-none ease group-hover:text-gray-900">Category</span>
                 </a>
             </li>
 
