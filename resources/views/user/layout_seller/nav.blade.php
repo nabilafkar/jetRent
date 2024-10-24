@@ -25,7 +25,7 @@
                  <ul class="flex flex-row justify-end pl-4 mb-0 list-none md-max:w-full">
                      @auth
                          <li class="flex items-center mr-4">
-                             <a href="/user/profile"
+                             <a href="{{ route('profile.edit') }}"
                                  class="block px-0 py-4 text-lg font-semibold text-white transition-all ease-nav-brand">
                                  <i class="fa fa-user sm:mr-1"></i>
                                  <span class="hidden sm:inline"></span>

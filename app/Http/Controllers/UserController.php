@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Rental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -104,5 +105,54 @@ class UserController extends Controller
             }
         }
         return view('user.list-transaction', compact('rentals'));
+    }
+
+    public function editProfile()
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Return the profile edit view with the user data
+        return view('user.profile-user', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional photo upload
+        ]);
+
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Update user profile information
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
+
+        // Handle photo upload if a new photo is provided
+        if ($request->hasFile('photo')) {
+            // Delete the old photo if it exists
+            if ($user->photo) {
+                // Assuming the photo is stored in the 'public/profile_photos' directory
+                Storage::disk('public')->delete($user->photo);
+            }
+
+            // Store the new photo
+            $path = $request->file('photo')->store('profile_photos', 'public');
+            $user->photo = $path; // Store the file path in the database
+        }
+
+        // Save the updated user profile
+        $user->save();
+
+        // Redirect back with a success message
+        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
     }
 }

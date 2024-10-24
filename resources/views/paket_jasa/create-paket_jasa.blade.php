@@ -11,8 +11,6 @@
 @section('content')
     @include('seller.layout_seller.alert')
 
-
-
     <form enctype="multipart/form-data" action="{{ route('unit.store') }}" method="post">
         @csrf
         <div class=" bg-lightGrey rounded-xl p-14 text-white">

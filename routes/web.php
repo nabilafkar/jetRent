@@ -33,6 +33,10 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'indexRegister']);
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit')->middleware('auth');
+Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update')->middleware('auth');
+
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/admin/unit', [UnitController::class, 'index'])->name('admin.dashboard');
