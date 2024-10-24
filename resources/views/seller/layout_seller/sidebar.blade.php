@@ -41,8 +41,8 @@
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                         <i class="relative top-0 text-sm leading-normal text-emerald-500 fa fa-envelope"></i>
                     </div>
-                    <span
-                        class="ml-1 duration-300 opacity-100 pointer-events-none ease group-hover:text-gray-900 ">Pesanan</span>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease group-hover:text-gray-900 ">List
+                        Rental</span>
                 </a>
             </li>
 

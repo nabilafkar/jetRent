@@ -20,14 +20,14 @@
             </div>
         </div>
     </div>
-    {{-- start of paket jasa --}}
+    {{-- start of Jet Pribadi --}}
     <div class="container mx-auto px-12  ">
 
         <div class="grid grid-cols-4 gap-4 my-14">
             <div class="col-span-4  ">
-                <h1 class="text-white text-3xl font-medium text-center"> Cari Paket Jasa Foto & Video</h1>
-                <p class="text-center text-lg">Temukan berbagai penawaran menarik dari seller terbaik kami</p>
-
+                <h1 class="text-white text-3xl font-medium text-center"> Cari Jet Pribadi Terbaik</h1>
+                <p class="text-center text-lg">Temukan berbagai penawaran menarik dari Kami</p>
+                {{--
                 <form class="mt-4 w-[70%] mx-auto mb-4" action="" method="get">
                     <div class="flex">
                         <label for="search-dropdown"
@@ -36,7 +36,7 @@
                         <div class="relative w-full">
                             <input type="text" id="search-dropdown"
                                 class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                placeholder="Cari paket jasa yang diinginkan.." required name="searchPaketJasa"
+                                placeholder="Cari Jet Pribadi yang diinginkan.." required name="searchPaketJasa"
                                 value="" />
                             <button type="submit"
                                 class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-shotlanceTosca rounded-e-lg border border-blue-700 hover:bg-hoverTosca focus:ring-4 focus:outline-none focus:ring-blue-300 transition ease-in-out delay-75">
@@ -49,21 +49,22 @@
                             </button>
                         </div>
                     </div>
-                </form>
+                </form> --}}
 
             </div>
 
 
 
-            @forelse ($packages as $package)
+            @forelse ($units as $unit)
                 <div
-                    id="package{{ $package->id }}"class="w-full max-w-sm rounded-lg  shadow bg-lightGrey border-gray-700 ">
-                    <a href="packages/{{ $package->id }}">
-                        <img src="{{ $package->getImageURL() }}" alt="thumbnail paket jasa" class="rounded-lg w-full h-60">
+                    id="package{{ $unit->id }}"class="w-full max-w-sm rounded-lg  shadow bg-lightGrey border-gray-700 ">
+                    <a href="packages/{{ $unit->id }}">
+                        <img src="{{ asset('storage/' . $unit->photo) }}" alt="thumbnail Jet Pribadi"
+                            class="rounded-lg w-full h-60">
                     </a>
                     <div class="px-5 pb-5 pt-4">
                         <a href="#">
-                            <h5 class="text-xl font-semibold tracking-tight text-white">{{ $package->title }}</h5>
+                            <h5 class="text-xl font-semibold tracking-tight text-white">{{ $unit->name }}</h5>
                         </a>
                         {{-- start of rating --}}
                         <div class="flex items-center mt-2.5 mb-2">
@@ -99,44 +100,20 @@
                         </div>
                         {{-- end of rating --}}
                         <div class="text-gray-200 mb-2">
-                            <p>by : {{ $package->user->fname ?? 'user1' }}</p>
+
+                            <p>{{ $unit->desc }}</p>
                         </div>
                         <div class="mb-2">
                             <span class="text-md font-bold text-white">Rp
-                                {{ number_format($package->min_price, 0, ',', '.') }}
-                                - {{ number_format($package->max_price, 0, ',', '.') }}</span>
+                                {{ number_format($unit->price, 0, ',', '.') }}/day
+                            </span>
                         </div>
                         <div class="flex items-center justify-between ">
-                            <a href="{{ route('viewPaketJasa', $package->id) }}"
-                                class="text-white bg-shotlanceTosca hover:bg-hoverTosca focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  transition ease-in-out delay-75">Detail</a>
+                            <a href="https://wa.me/6282147588138?text=Halo%20saya%20ingin%20pesan%20jet"
+                                class="text-white bg-shotlanceTosca hover:bg-hoverTosca focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  transition ease-in-out delay-75">Pesan</a>
                             {{-- start of tombol favorite --}}
 
-                            @if ($user && $user->favorite->where('package_id', $package->id)->isEmpty())
-                                <form action="{{ route('paket-jasa.favorite.store', $package->id) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" value="{{ $package->id }}" name="package_id">
-                                    <button type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                        </svg>
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('paket-jasa.favorite.delete', $package->id) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input type="hidden" value="{{ $package->id }}" name="package_id">
-                                    <button type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                        </svg>
-                                    </button>
-                                </form>
-                            @endif
+
                             {{-- end of tombol favorite --}}
                             {{-- <div class="">{{$user->favorite->where('package_id', $package->id)}}</div> --}}
 
@@ -146,17 +123,17 @@
                 </div>
             @empty
                 <div class="text-white">
-                    <h1>Pencarian Paket Jasa Tidak ditemukan</h1>
+                    <h1>Pencarian Jet Pribadi Tidak ditemukan</h1>
                 </div>
             @endforelse
 
         </div>
         <div class="mt-4 flex items-center justify-center text-white !important">
-            {{-- {{ $packages->links() }} --}}
+            {{ $units->links() }}
         </div>
 
     </div>
-    {{-- end of paket jasa --}}
+    {{-- end of Jet Pribadi --}}
 
 
     {{-- start of footer --}}
@@ -207,8 +184,8 @@
             </div>
             <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
             <div class="sm:flex sm:items-center sm:justify-between container">
-                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
-                        href="https://flowbite.com/" class="hover:underline">Shotlance™</a>. All Rights Reserved.
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
+                        class="hover:underline">Shotlance™</a>. All Rights Reserved.
                 </span>
                 <div class="flex mt-4 sm:justify-center sm:mt-0">
                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">

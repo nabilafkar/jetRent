@@ -34,33 +34,41 @@
 <body class="bg-midnight">
     <div class="bg-midnight h-full text-white">
         <div class="flex h-screen">
-            <div class="w-1/2 pt-[10%] px-[10%] items-center space-y-6">
+            <div class="w-1/2 pt-[6%] px-[10%] items-center space-y-6">
                 <img src="{{ asset('images/logo.png') }}" alt="thumbnail" class="h-auto w-[200px]">
                 <h1 class="text-4xl ">Registrasi</h1>
-                <form class="grid grid-cols-1 space-y-6 " action="/register" method="post">
+                <form class="grid grid-cols-1 space-y-6 " action="{{ route('register') }}" method="post">
                     @csrf
                     <div class="">
-                        <input type="text" id="fname" name="fname"
+                        <input type="text" id="fname" name="name"
                             class="w-full px-4 py-3 border rounded-md focus:outline-none text-black @error('fname') is-invalid @enderror"
-                            placeholder="Nama Depan">
-                        @error('fname')
+                            placeholder="Nama Lengkap">
+                        @error('name')
                             <div class="text-xs text-red-500">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-
                     <div class="">
-                        <input type="text" id="lname" name="lname"
-                            class="w-full px-4 py-3 border rounded-md focus:outline-none text-black @error('lname') is-invalid @enderror"
-                            placeholder="Nama Belakang">
-                        @error('lname')
+                        <input type="text" id="fname" name="phone"
+                            class="w-full px-4 py-3 border rounded-md focus:outline-none text-black @error('fname') is-invalid @enderror"
+                            placeholder="Nomor Handphone">
+                        @error('phone')
                             <div class="text-xs text-red-500">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-
+                    <div class="">
+                        <input type="text" id="fname" name="address"
+                            class="w-full px-4 py-3 border rounded-md focus:outline-none text-black @error('fname') is-invalid @enderror"
+                            placeholder="Alamat">
+                        @error('address')
+                            <div class="text-xs text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <div class="">
                         <input type="email" id="email" name="email"
                             class="w-full px-4 py-3 border rounded-md focus:outline-none text-black @error('email') is-invalid @enderror"
