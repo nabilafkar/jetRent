@@ -72,7 +72,7 @@
                             </td>
 
                         <td class="px-6 py-4">
-                            {{ $unit->stock ? 'Ada' : 'Tidak Ada' }}
+                            {{ $unit->stock ? 'Tersedia' : 'Disewakan' }}
                         </td>
                         <td class="px-6 py-4">
                             <span>{{ number_format($unit->price, 0, ',', '.') }}</span>
@@ -80,7 +80,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex justify-center space-x-2">
-                                <a href=""
+                                <a href="{{ route('rentals.create', $unit->id) }}"
                                     class="text-white bg-shotlanceTosca hover:bg-hoverTosca focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  mb-2 focus:outline-none ">Rental</a>
                                 <a href="{{ route('unit.edit', $unit->id) }}"
                                     class="text-white bg-shotlanceTosca hover:bg-hoverTosca focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  mb-2 focus:outline-none ">Edit</a>

@@ -1,23 +1,98 @@
 @extends('seller.layout_seller.layout')
 
 @section('judul')
-    Unit Jet
+    Rental Jet
 @endsection
 
 @section('sub-judul')
-    Tambah Unit Jet
+    Tambah Rental
 @endsection
 
 @section('content')
     @include('seller.layout_seller.alert')
+    <div class="container mx-auto mt-10">
+        <h1 class="text-3xl font-bold mb-6 text-white">Rental Unit</h1>
 
+        <form action="{{ route('rentals.store') }}" method="POST" class="grid grid-cols-2 gap-14">
+            @csrf
+            <!-- Left side form -->
+            <div>
+                <!-- Select User -->
+                <div class="mb-4">
+                    <label for="user_id" class="block mb-2 text-sm font-medium text-white">Pilih User</label>
+                    <select name="user_id" id="user_id"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="">Pilih User</option>
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}</option>
+                        @endforeach
+                    </select>
+                    @error('user_id')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
 
+                <!-- Select Penalty -->
+                <div class="mb-4">
+                    <label for="penalty_id" class="block mb-2 text-sm font-medium text-white">Pilih Penalty</label>
+                    <select name="penalty_id" id="penalty_id"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <option value="">Pilih Penalty</option>
+                        @foreach ($penalties as $penalty)
+                            <option value="{{ $penalty->id }}">{{ $penalty->penalty_code }} - Max Days:
+                                {{ $penalty->max_day }}</option>
+                        @endforeach
+                    </select>
+                    @error('penalty_id')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
 
-    <form enctype="multipart/form-data" action="{{ route('unit.store') }}" method="post">
+                <!-- Rent Start Date -->
+                <div class="mb-4">
+                    <label for="rent_start" class="block mb-2 text-sm font-medium text-white">Tanggal Mulai Sewa</label>
+                    <input type="date" id="rent_start" name="rent_start" min="{{ date('Y-m-d') }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        required>
+                    @error('rent_start')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <!-- Right side for unit display -->
+            <div>
+                <div class="mb-4">
+                    <label for="unit" class="block mb-2 text-sm font-medium text-white">Kode Unit</label>
+
+                    <input type="text" id="unit" name="unit" value="{{ $unit->unit_code }}" readonly
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <input type="hidden" name="unit_id" value="{{ $unit->id }}">
+                </div>
+                <div class="mb-4">
+                    <label for="unit" class="block mb-2 text-sm font-medium text-white">Nama Unit</label>
+
+                    <input type="text" id="unit" name="unit" value="{{ $unit->name }}" readonly
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-span-2">
+                <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded">
+                    Simpan Rental
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {{-- <form enctype="multipart/form-data" action="{{ route('unit.store') }}" method="post">
         @csrf
         <div class=" bg-lightGrey rounded-xl p-14 text-white">
             <div class="col-span-2 flex rounded-xl mb-6 justify-between items-center ">
-                <h1 class="font-bold text-3xl mb-5 text-white">Detail Unit Jet</h1>
+                <h1 class="font-bold text-3xl mb-5 text-white">Detail Rental</h1>
                 <a href="{{ route('admin.dashboard') }}"
                     class="inline-block px-6 py-2.5  rounded-md bg-red-400 text-white bg-red duration-300 hover:bg-red-200 font-medium">
                     X Batalkan Penambahan </a>
@@ -124,7 +199,7 @@
                 </form>
             </div>
         </div>
-    </form>
+    </form> --}}
 @endsection
 
 
