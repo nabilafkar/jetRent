@@ -15,7 +15,36 @@ class RentalController extends Controller
      */
     public function index()
     {
-        //
+
+        $rentals = Rental::with(['user', 'unit', 'penalty'])
+            ->orderBy('rent_start', 'desc')
+            ->paginate(10);
+
+        // Tanggal sekarang
+        $currentDate = now();
+
+
+        foreach ($rentals as $rental) {
+
+            if ($rental->rent_end < $currentDate) {
+
+                $lateDays = $currentDate->diffInDays($rental->rent_end);
+
+                if ($rental->penalty) {
+                    $penaltyAmount = $lateDays * $rental->penalty->price;
+                    $rental->total_penalty = $penaltyAmount;
+
+
+                    $rental->total_price += $penaltyAmount;
+                }
+            } else {
+                // Jika tidak terlambat, total penalty = 0
+                $rental->total_penalty = 0;
+            }
+        }
+
+        // Kirim data ke view
+        return view('rental.index-rental', compact('rentals'));
     }
 
     /**
@@ -56,6 +85,10 @@ class RentalController extends Controller
 
 
         $rent_end = date('Y-m-d', strtotime($request->rent_start . " + {$penalty->max_day} days"));
+        // Ambil data unit
+        $unit = Unit::findOrFail($request->unit_id);
+        $totalPrice = $unit->price * $penalty->max_day;
+
 
         Rental::create([
             'user_id' => $request->user_id,
@@ -63,6 +96,7 @@ class RentalController extends Controller
             'rent_start' => $request->rent_start,
             'rent_end' => $rent_end,
             'penalty_id' => $request->penalty_id,
+            'total_price' => $totalPrice,
         ]);
 
         $user->increment('rent_count');
@@ -74,36 +108,24 @@ class RentalController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Rental berhasil dibuat.');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function returnRental(Rental $rental)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        if ($rental->returned) {
+            return back()->with('error', 'Rental sudah dikembalikan.');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $rental->update([
+            'returned' => true,
+            'rent_return' => now(),
+        ]);
+
+        $rental->user->decrement('rent_count');
+
+
+        $rental->unit->update(['stock' => true]);
+
+        return back()->with('success', 'Rental berhasil dikembalikan.');
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('rent_end');
             $table->date('rent_return')->nullable();
             $table->boolean('returned')->default(false);
+            $table->decimal('total_price', 15, 2);
             $table->foreignId('penalty_id')->nullable()->constrained('penalties')->onDelete('set null');
             $table->timestamps();
         });

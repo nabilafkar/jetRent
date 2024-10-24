@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('admin/rentals/create/{unit}', [RentalController::class, 'create'])->name('rentals.create');
         Route::post('admin/rentals', [RentalController::class, 'store'])->name('rentals.store');
+        Route::get('admin/rentals', [RentalController::class, 'index'])->name('rentals.index');
+        Route::put('admin/rentals/{rental}/return', [RentalController::class, 'returnRental'])->name('rentals.return');
     });
 
     Route::group(['middleware' => ['role:user']], function () {

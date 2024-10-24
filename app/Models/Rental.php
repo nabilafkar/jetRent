@@ -16,6 +16,7 @@ class Rental extends Model
         'rent_return',
         'returned',
         'penalty_id',
+        'total_price',
     ];
 
     public function user()

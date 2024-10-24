@@ -35,8 +35,8 @@
             </li>
 
             <li class="mt-0.5 w-full">
-                <a class=" hover:bg-slate-200 group rounded-xl duration-300 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ Request::is('seller/orders*') ? 'text-black bg-slate-200 rounded-xl' : '' }}"
-                    href="">
+                <a class="{{ Request::is('*rentals') ? 'text-black bg-slate-200 rounded-xl' : '' }} hover:bg-slate-200 group rounded-xl duration-300 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors {{ Request::is('seller/orders*') ? 'text-black bg-slate-200 rounded-xl' : '' }}"
+                    href="{{ route('rentals.index') }}">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                         <i class="relative top-0 text-sm leading-normal text-emerald-500 fa fa-envelope"></i>
