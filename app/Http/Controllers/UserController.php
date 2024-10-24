@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Rental;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -69,5 +71,38 @@ class UserController extends Controller
     {
         $user->delete(); // Hapus pengguna
         return redirect()->route('users.index')->with('success', 'Pengguna berhasil dihapus.');
+    }
+
+
+    public function myTransactions()
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Retrieve rentals for the authenticated user
+        $rentals = Rental::with(['user', 'unit', 'penalty'])
+            ->where('user_id', $user->id) // Filter by the authenticated user's ID
+            ->orderBy('rent_start', 'desc')
+            ->paginate(10);
+
+        // Current date
+        $currentDate = now();
+
+        foreach ($rentals as $rental) {
+            if ($rental->rent_end < $currentDate) {
+                $lateDays = $currentDate->diffInDays($rental->rent_end);
+
+                if ($rental->penalty) {
+                    $penaltyAmount = $lateDays * $rental->penalty->price;
+                    $rental->total_penalty = $penaltyAmount;
+
+                    $rental->total_price += $penaltyAmount;
+                }
+            } else {
+                // If not late, total penalty = 0
+                $rental->total_penalty = 0;
+            }
+        }
+        return view('user.list-transaction', compact('rentals'));
     }
 }

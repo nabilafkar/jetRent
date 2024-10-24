@@ -25,6 +25,7 @@ use App\Http\Controllers\LandingpageController;
 // });
 
 Route::get('/', [LandingpageController::class, 'index'])->name('landingpage');
+Route::get('/search', [LandingpageController::class, 'search'])->name('search');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
@@ -63,6 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware' => ['role:user']], function () {
-        Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+        Route::get('/user/dashboard', [UserController::class, 'myTransactions'])->name('user.dashboard');
     });
 });

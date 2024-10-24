@@ -7,7 +7,7 @@
             </a>
         </div>
 
-        <form action ="" method ="get" class=" dark flex items-center w-[80%] mr-3">
+        <form action ="{{ route('search') }}" method ="get" class=" dark flex items-center w-[80%] mr-3">
 
             <div class="relative w-full">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -19,7 +19,7 @@
                 </div>
                 <input type="text" id="voice-search" name="search"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cari Paket Jasa..." required value="{{ old('search', $search) }}" />
+                    placeholder="Cari Jet Pribadi..." required value="{{ old('search', $search) }}" />
                 <button type="submit" class="absolute inset-y-0 end-0 flex items-center pe-3">
                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
@@ -92,7 +92,7 @@
                         aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
 
                         <li>
-                            <a href=""
+                            <a href="{{ route('user.dashboard') }}"
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                         </li>
 
@@ -104,7 +104,7 @@
                             <a href="/user/profile"
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
                         </li>
-         
+
 
                         @if (Auth::user()->role == 'buyer')
                             <li>
