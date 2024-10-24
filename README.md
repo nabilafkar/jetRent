@@ -1,4 +1,5 @@
 # jetRent I Website Penyewaan Jet Pribadi
+by : Nabil Afkar @nabil_afkar
 
 # Gambaran Umum Proyek
 Proyek ini adalah platform berbasis web yang dirancang untuk menyewakan jet pribadi. Platform ini memungkinkan pengguna untuk melihat jet yang tersedia, menyewanya untuk periode tertentu, serta menangani pembayaran dan penalti jika ada keterlambatan pengembalian. Sistem ini mencakup akses berbasis peran untuk admin dan pengguna, yang memudahkan pengelolaan penyewaan jet.
