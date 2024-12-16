@@ -1,6 +1,10 @@
 # jetRent I Website Penyewaan Jet Pribadi
-by : AADL 
-
+by : Ada Apa Dengan Laravel (AADL)
+1. Nabil afkar
+2. Ridho Indra Kriswiyanto
+3. Avicena Naufaldo
+4. Fazar Arya Suwandi
+   
 # Gambaran Umum Proyek
 Proyek ini adalah platform berbasis web yang dirancang untuk menyewakan jet pribadi. Platform ini memungkinkan pengguna untuk melihat jet yang tersedia, menyewanya untuk periode tertentu, serta menangani pembayaran dan penalti jika ada keterlambatan pengembalian. Sistem ini mencakup akses berbasis peran untuk admin dan pengguna, yang memudahkan pengelolaan penyewaan jet.
 
